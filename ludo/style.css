@@ -1,16 +1,24 @@
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .ludo-container {
-    width: 450px;
-    margin: 20px auto;
+    width: 600px;
 }
 
 .ludo-container .ludo {
-
-    height: 450px;
     width: 100%;
+    height: 600px;
     background-image: url('./ludo-bg.jpg');
     background-size: contain;
     position: relative;
@@ -29,17 +37,17 @@
     position: absolute;
     transform: translate(50%, 50%);
     transition: all .2s;
-
     z-index: 1;
-
     /* top: 15%;
     left: 50%; */
 }
+
 .player-piece.highlight {
     cursor: pointer;
     border: 2px dashed;
     animation: spin 1s infinite linear;
 }
+
 @keyframes spin {
     0% {
         transform: translate(50%, 50%) rotate(0deg);
@@ -114,4 +122,8 @@
 .dice-value {
     font-size: 24px;
     font-weight: bold;
+}
+
+.active-player {
+    margin-top: 15px;
 }
