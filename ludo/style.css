@@ -13,12 +13,12 @@
 }
 
 .ludo-container {
-    width: 600px;
+    width: 500px;
 }
 
 .ludo-container .ludo {
     width: 100%;
-    height: 600px;
+    height: 500px;
     background-image: url('./ludo-bg.jpg');
     background-size: contain;
     position: relative;
@@ -68,6 +68,14 @@
     background-color: #00b550;
 }
 
+[player-id="P3"].player-piece {
+    background-color: #ffde15;
+}
+
+[player-id="P4"].player-piece {
+    background-color: #e9161f;
+}
+
 .player-base {
     width: 40%;
     height: 40%;
@@ -85,6 +93,18 @@
     top: 0;
     right: 0;
     border-color: #049645;
+}
+
+.player-bases [player-id="P3"].player-base {
+    top: 0;
+    left: 0;
+    border-color: #ffde15;
+}
+
+.player-bases [player-id="P4"].player-base {
+    bottom: 0;
+    right: 0;
+    border-color: #e9161f;
 }
 
 .player-base.highlight {

@@ -4,7 +4,9 @@ import { UI } from './UI.js';
 export class Ludo {
     currentPositions = {
         P1: [],
-        P2: []
+        P2: [],
+        P3: [],
+        P4: []
     }
 
     _diceValue;
