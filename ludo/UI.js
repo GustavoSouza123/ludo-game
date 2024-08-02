@@ -6,30 +6,44 @@ const playerPiecesElements = {
     P2: document.querySelectorAll('[player-id="P2"].player-piece'),
     P3: document.querySelectorAll('[player-id="P3"].player-piece'),
     P4: document.querySelectorAll('[player-id="P4"].player-piece'),
-}
+};
 
 export class UI {
     static listenDiceClick(callback) {
         diceButtonElement.addEventListener('click', callback);
+        window.addEventListener('keydown', (event) => {
+            if (event.keyCode === 13) {
+                callback();
+            }
+        });
     }
 
     static listenResetClick(callback) {
-        document.querySelector('button#reset-btn').addEventListener('click', callback)
+        document
+            .querySelector('button#reset-btn')
+            .addEventListener('click', callback);
     }
 
     static listenPieceClick(callback) {
-        document.querySelector('.player-pieces').addEventListener('click', callback)
+        document
+            .querySelector('.player-pieces')
+            .addEventListener('click', callback);
     }
 
     /**
-     * 
-     * @param {string} player 
-     * @param {Number} piece 
-     * @param {Number} newPosition 
+     *
+     * @param {string} player
+     * @param {Number} piece
+     * @param {Number} newPosition
      */
     static setPiecePosition(player, piece, newPosition) {
-        if(!playerPiecesElements[player] || !playerPiecesElements[player][piece]) {
-            console.error(`Player element of given player: ${player} and piece: ${piece} not found`)
+        if (
+            !playerPiecesElements[player] ||
+            !playerPiecesElements[player][piece]
+        ) {
+            console.error(
+                `Player element of given player: ${player} and piece: ${piece} not found`
+            );
             return;
         }
 
@@ -41,22 +55,26 @@ export class UI {
     }
 
     static setTurn(index) {
-        if(index < 0 || index >= PLAYERS.length) {
+        if (index < 0 || index >= PLAYERS.length) {
             console.error('index out of bound!');
             return;
         }
-        
+
         const player = PLAYERS[index];
 
         // Display player ID
         document.querySelector('.active-player span').innerText = player;
 
-        const activePlayerBase = document.querySelector('.player-base.highlight');
-        if(activePlayerBase) {
+        const activePlayerBase = document.querySelector(
+            '.player-base.highlight'
+        );
+        if (activePlayerBase) {
             activePlayerBase.classList.remove('highlight');
         }
         // highlight
-        document.querySelector(`[player-id="${player}"].player-base`).classList.add('highlight')
+        document
+            .querySelector(`[player-id="${player}"].player-base`)
+            .classList.add('highlight');
     }
 
     static enableDice() {
@@ -68,21 +86,21 @@ export class UI {
     }
 
     /**
-     * 
-     * @param {string} player 
-     * @param {Number[]} pieces 
+     *
+     * @param {string} player
+     * @param {Number[]} pieces
      */
     static highlightPieces(player, pieces) {
-        pieces.forEach(piece => {
+        pieces.forEach((piece) => {
             const pieceElement = playerPiecesElements[player][piece];
             pieceElement.classList.add('highlight');
-        })
+        });
     }
 
     static unhighlightPieces() {
-        document.querySelectorAll('.player-piece.highlight').forEach(ele => {
+        document.querySelectorAll('.player-piece.highlight').forEach((ele) => {
             ele.classList.remove('highlight');
-        })
+        });
     }
 
     static setDiceValue(value) {
@@ -92,7 +110,7 @@ export class UI {
 
 // UI.setPiecePosition('P1', 0, 0);
 // UI.setTurn(0);
-// UI.setTurn(1);
+// UI.setTurn(2);
 
 // UI.disableDice();
 // UI.enableDice();

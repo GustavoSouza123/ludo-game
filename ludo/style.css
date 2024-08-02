@@ -36,7 +36,7 @@
     border-radius: 10px;
     position: absolute;
     transform: translate(50%, 50%);
-    transition: all .2s;
+    transition: all 0.2s;
     z-index: 1;
     /* top: 15%;
     left: 50%; */
@@ -60,19 +60,19 @@
     }
 }
 
-[player-id="P1"].player-piece {
+[player-id='P1'].player-piece {
     background-color: #2eafff;
 }
 
-[player-id="P2"].player-piece {
-    background-color: #00b550;
-}
-
-[player-id="P3"].player-piece {
+[player-id='P2'].player-piece {
     background-color: #ffde15;
 }
 
-[player-id="P4"].player-piece {
+[player-id='P3'].player-piece {
+    background-color: #00b550;
+}
+
+[player-id='P4'].player-piece {
     background-color: #e9161f;
 }
 
@@ -83,32 +83,32 @@
     position: absolute;
 }
 
-.player-bases [player-id="P1"].player-base {
+.player-bases [player-id='P1'].player-base {
     bottom: 0;
     left: 0;
     border-color: #1295e7;
 }
 
-.player-bases [player-id="P2"].player-base {
-    top: 0;
-    right: 0;
-    border-color: #049645;
-}
-
-.player-bases [player-id="P3"].player-base {
+.player-bases [player-id='P2'].player-base {
     top: 0;
     left: 0;
     border-color: #ffde15;
 }
 
-.player-bases [player-id="P4"].player-base {
+.player-bases [player-id='P3'].player-base {
+    top: 0;
+    right: 0;
+    border-color: #049645;
+}
+
+.player-bases [player-id='P4'].player-base {
     bottom: 0;
     right: 0;
     border-color: #e9161f;
 }
 
 .player-base.highlight {
-    animation: border-blink .7s infinite ease-in-out;
+    animation: border-blink 0.7s infinite ease-in-out;
 }
 
 @keyframes border-blink {
