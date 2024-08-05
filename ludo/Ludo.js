@@ -68,17 +68,17 @@ export class Ludo {
         UI.setTurn(0, this.totalTurns);
 
         // random moves
-        setInterval(() => {
-            UI.randomMoves(this.diceValue, this.currentPositions);
-        }, 500);
+        // setInterval(() => {
+        //     UI.randomMoves(this.diceValue, this.currentPositions);
+        // }, 500);
 
         // this.diceValue = 4;
         // this.turn = 0;
-        // this.state = STATE.DICE_ROLLED;
         // this.setPiecePosition('P1', 0, 0);
-        // this.setPiecePosition('P2', 0, 1);
-        // this.diceValue = 6;
-        // console.log(this.getEligiblePieces('P1'))
+        // this.setPiecePosition('P4', 0, 1);
+        // this.setPiecePosition('P2', 0, 2);
+        // this.setPiecePosition('P3', 0, 3);
+        // document.querySelector('#dice-btn').click();
     }
 
     listenDiceClick() {
@@ -87,6 +87,7 @@ export class Ludo {
 
     onDiceClick() {
         this.diceValue = 1 + Math.floor(Math.random() * 6);
+        // this.diceValue = 1;
         this.state = STATE.DICE_ROLLED;
 
         this.checkForEligiblePieces();
@@ -111,7 +112,7 @@ export class Ludo {
             this.turn++;
         }
         this.state = STATE.DICE_NOT_ROLLED;
-        // console.log(this.currentPositions);
+        console.log(this.currentPositions);
     }
 
     getEligiblePieces(player) {
@@ -234,19 +235,31 @@ export class Ludo {
     checkForKill(player, piece) {
         const currentPosition = this.currentPositions[player][piece];
 
-        let opponent = [];
+        let isOpponentInPosition = [];
         for (let i = 1; i <= 4; i++) {
             if (`P${i}` != player) {
-                opponent.push(
+                isOpponentInPosition.push(
                     this.currentPositions[`P${i}`].some(
                         (pos) => pos === currentPosition
                     )
                 );
             } else {
-                opponent.push(player);
+                isOpponentInPosition.push('');
             }
         }
+
+        const opponent = `P${isOpponentInPosition.findIndex(value => value)+1}`
+        console.log(isOpponentInPosition);
         console.log(opponent);
+
+        // currentPositions = {
+        //     P1: [],
+        //     P2: [],
+        //     P3: [],
+        //     P4: [],
+        // };
+
+        
 
         // const opponent = player === 'P1' ? 'P2' : 'P1'; // STOPPED HERE, KILL NOT WORKING
 

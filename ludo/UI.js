@@ -129,16 +129,21 @@ export class UI {
         let playerToClick;
 
         diceButtonElement.click();
-        if(playerNotOnBoard >= 0) {
-            if(diceValue === 6) {
-                console.log('SIX')
-                console.log('not on board', playerNotOnBoard);
-
+        
+        if(diceValue === 6) {
+            console.log('SIX')
+            console.log('not on board', playerNotOnBoard);
+            if(isPlayersOnBoard.findIndex(player => !player) >= 0) {
                 playerToClick = isPlayersOnBoard.findIndex(player => !player);
+                console.log('PLAYER TO CLICK: ', playerToClick)
                 playerPiecesElements[activePlayer][playerToClick].click();
+                return;
             }
-        } else {
+        }
+
+        if(isPlayersOnBoard.findIndex(player => player) >= 0) {
             playerToClick = isPlayersOnBoard.findIndex(player => player);
+            console.log('PLAYER TO CLICK: ', playerToClick)
             playerPiecesElements[activePlayer][playerToClick].click();
         }
         
