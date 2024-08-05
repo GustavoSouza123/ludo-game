@@ -248,16 +248,23 @@ export class Ludo {
             }
         }
 
-        const opponent = `P${isOpponentInPosition.findIndex(value => value)+1}`;
+        const opponent = `P${
+            isOpponentInPosition.findIndex((value) => value) + 1
+        }`;
         console.log('isOpponentInPosition', isOpponentInPosition);
         console.log(opponent);
 
         let kill = false;
 
-        if(opponent == 'P1' || opponent == 'P2' || opponent == 'P3' || opponent == 'P4') {
+        if (
+            opponent == 'P1' ||
+            opponent == 'P2' ||
+            opponent == 'P3' ||
+            opponent == 'P4'
+        ) {
             [0, 1, 2, 3].forEach((piece) => {
                 const opponentPosition = this.currentPositions[opponent][piece];
-    
+
                 if (
                     currentPosition === opponentPosition &&
                     !SAFE_POSITIONS.includes(currentPosition)
