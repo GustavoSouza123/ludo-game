@@ -68,16 +68,16 @@ export class Ludo {
         UI.setTurn(0, this.totalTurns);
 
         // random moves
-        // setInterval(() => {
-        //     UI.randomMoves(this.diceValue, this.currentPositions);
-        // }, 500);
+        setInterval(() => {
+            UI.randomMoves(this.diceValue, this.currentPositions);
+        }, 500);
 
         // this.diceValue = 4;
-        // this.turn = 0;
-        // this.setPiecePosition('P1', 0, 0);
-        // this.setPiecePosition('P4', 0, 1);
-        // this.setPiecePosition('P2', 0, 2);
-        // this.setPiecePosition('P3', 0, 3);
+        // this.turn = 2;
+        // this.setPiecePosition('P3', 0, 28);
+        // this.setPiecePosition('P1', 0, 29);
+        // this.setPiecePosition('P2', 0, 30);
+        // this.setPiecePosition('P4', 0, 31);
         // document.querySelector('#dice-btn').click();
     }
 
@@ -112,7 +112,7 @@ export class Ludo {
             this.turn++;
         }
         this.state = STATE.DICE_NOT_ROLLED;
-        console.log(this.currentPositions);
+        // console.log(this.currentPositions);
     }
 
     getEligiblePieces(player) {
@@ -229,7 +229,7 @@ export class Ludo {
 
                 this.incrementTurn();
             }
-        }, 200);
+        }, 50);
     }
 
     checkForKill(player, piece) {
@@ -248,48 +248,29 @@ export class Ludo {
             }
         }
 
-        const opponent = `P${isOpponentInPosition.findIndex(value => value)+1}`
-        console.log(isOpponentInPosition);
+        const opponent = `P${isOpponentInPosition.findIndex(value => value)+1}`;
+        console.log('isOpponentInPosition', isOpponentInPosition);
         console.log(opponent);
-
-        // currentPositions = {
-        //     P1: [],
-        //     P2: [],
-        //     P3: [],
-        //     P4: [],
-        // };
-
-        
-
-        // const opponent = player === 'P1' ? 'P2' : 'P1'; // STOPPED HERE, KILL NOT WORKING
-
-        // ISSO ESTÁ ERRADO
-        // let opponent =
-        //     player === 'P1'
-        //         ? 'P2'
-        //         : player === 'P2'
-        //         ? 'P3'
-        //         : player === 'P3'
-        //         ? 'P4'
-        //         : 'P1';
 
         let kill = false;
 
-        [0, 1, 2, 3].forEach((piece) => {
-            const opponentPosition = this.currentPositions[opponent][piece];
-
-            if (
-                currentPosition === opponentPosition &&
-                !SAFE_POSITIONS.includes(currentPosition)
-            ) {
-                this.setPiecePosition(
-                    opponent,
-                    piece,
-                    BASE_POSITIONS[opponent][piece]
-                );
-                kill = true;
-            }
-        });
+        if(opponent == 'P1' || opponent == 'P2' || opponent == 'P3' || opponent == 'P4') {
+            [0, 1, 2, 3].forEach((piece) => {
+                const opponentPosition = this.currentPositions[opponent][piece];
+    
+                if (
+                    currentPosition === opponentPosition &&
+                    !SAFE_POSITIONS.includes(currentPosition)
+                ) {
+                    this.setPiecePosition(
+                        opponent,
+                        piece,
+                        BASE_POSITIONS[opponent][piece]
+                    );
+                    kill = true;
+                }
+            });
+        }
 
         return kill;
     }
