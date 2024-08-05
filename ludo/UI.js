@@ -7,6 +7,7 @@ const playerPiecesElements = {
     P3: document.querySelectorAll('[player-id="P3"].player-piece'),
     P4: document.querySelectorAll('[player-id="P4"].player-piece'),
 };
+const totalTurnsElement = document.querySelector('.total-turns span');
 
 export class UI {
     static listenDiceClick(callback) {
@@ -54,7 +55,7 @@ export class UI {
         pieceElement.style.left = x * STEP_LENGTH + '%';
     }
 
-    static setTurn(index) {
+    static setTurn(index, totalTurns) {
         if (index < 0 || index >= PLAYERS.length) {
             console.error('index out of bound!');
             return;
@@ -62,14 +63,22 @@ export class UI {
 
         const player = PLAYERS[index];
 
+        let lastPlayer =
+            player === 'P1'
+                ? 'P4'
+                : player === 'P2'
+                ? 'P1'
+                : player === 'P3'
+                ? 'P2'
+                : 'P3';
+
         // Display player ID
         document.querySelector('.active-player span').innerText = player;
+        document.querySelector('.last-player span').innerText = totalTurns == 0 ? '-' : lastPlayer;
 
-        const activePlayerBase = document.querySelector(
-            '.player-base.highlight'
-        );
-        if (activePlayerBase) {
-            activePlayerBase.classList.remove('highlight');
+        const lastPlayerBase = document.querySelector('.player-base.highlight');
+        if (lastPlayerBase) {
+            lastPlayerBase.classList.remove('highlight');
         }
         // highlight
         document
@@ -105,6 +114,10 @@ export class UI {
 
     static setDiceValue(value) {
         document.querySelector('.dice-value').innerText = value;
+    }
+    
+    static incrementTotalTurns(value) {
+        totalTurnsElement.innerHTML = value;
     }
 }
 

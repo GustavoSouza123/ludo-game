@@ -133,17 +133,24 @@
     color: white;
 }
 
-.row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-
 .dice-value {
     font-size: 24px;
     font-weight: bold;
 }
 
-.active-player {
-    margin-top: 15px;
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.footer .row {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.footer p {
+    font-size: 18px;
 }

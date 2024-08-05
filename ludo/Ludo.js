@@ -34,7 +34,9 @@ export class Ludo {
     }
     set turn(value) {
         this._turn = value;
-        UI.setTurn(value);
+        this.totalTurns++;
+        UI.incrementTotalTurns(this.totalTurns);
+        UI.setTurn(value, this.totalTurns);
     }
 
     _state;
@@ -63,6 +65,10 @@ export class Ludo {
         this.listenPieceClick();
 
         this.resetGame();
+
+        this.totalTurns = 0;
+        UI.incrementTotalTurns(this.totalTurns);
+        UI.setTurn(0, this.totalTurns);
         // this.setPiecePosition('P1', 0, 0);
         // this.setPiecePosition('P2', 0, 1);
         // this.diceValue = 6;
@@ -100,6 +106,7 @@ export class Ludo {
             this.turn++;
         }
         this.state = STATE.DICE_NOT_ROLLED;
+        console.log(this.currentPositions);
     }
 
     getEligiblePieces(player) {
@@ -133,23 +140,23 @@ export class Ludo {
     }
 
     resetGame() {
-        if (confirm('Are you sure you want to reset this game')) {
-            console.log('reset game');
-            this.currentPositions = structuredClone(BASE_POSITIONS);
+        // if (confirm('Are you sure you want to reset this game')) {
+        console.log('reset game');
+        this.currentPositions = structuredClone(BASE_POSITIONS);
 
-            PLAYERS.forEach((player) => {
-                [0, 1, 2, 3].forEach((piece) => {
-                    this.setPiecePosition(
-                        player,
-                        piece,
-                        this.currentPositions[player][piece]
-                    );
-                });
+        PLAYERS.forEach((player) => {
+            [0, 1, 2, 3].forEach((piece) => {
+                this.setPiecePosition(
+                    player,
+                    piece,
+                    this.currentPositions[player][piece]
+                );
             });
+        });
 
-            this.turn = 0;
-            this.state = STATE.DICE_NOT_ROLLED;
-        }
+        this.turn = 0;
+        this.state = STATE.DICE_NOT_ROLLED;
+        // }
     }
 
     listenPieceClick() {
