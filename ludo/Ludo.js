@@ -57,9 +57,6 @@ export class Ludo {
     constructor() {
         console.log('Hello World! Lets play Ludo!');
 
-        // this.diceValue = 4;
-        // this.turn = 0;
-        // this.state = STATE.DICE_ROLLED;
         this.listenDiceClick();
         this.listenResetClick();
         this.listenPieceClick();
@@ -69,6 +66,15 @@ export class Ludo {
         this.totalTurns = 0;
         UI.incrementTotalTurns(this.totalTurns);
         UI.setTurn(0, this.totalTurns);
+
+        // random moves
+        setInterval(() => {
+            UI.randomMoves(this.diceValue, this.currentPositions);
+        }, 500);
+
+        // this.diceValue = 4;
+        // this.turn = 0;
+        // this.state = STATE.DICE_ROLLED;
         // this.setPiecePosition('P1', 0, 0);
         // this.setPiecePosition('P2', 0, 1);
         // this.diceValue = 6;
@@ -80,7 +86,6 @@ export class Ludo {
     }
 
     onDiceClick() {
-        console.log('dice clicked!');
         this.diceValue = 1 + Math.floor(Math.random() * 6);
         this.state = STATE.DICE_ROLLED;
 
@@ -106,7 +111,7 @@ export class Ludo {
             this.turn++;
         }
         this.state = STATE.DICE_NOT_ROLLED;
-        console.log(this.currentPositions);
+        // console.log(this.currentPositions);
     }
 
     getEligiblePieces(player) {
@@ -228,15 +233,32 @@ export class Ludo {
 
     checkForKill(player, piece) {
         const currentPosition = this.currentPositions[player][piece];
+
+        let opponent = [];
+        for (let i = 1; i <= 4; i++) {
+            if (`P${i}` != player) {
+                opponent.push(
+                    this.currentPositions[`P${i}`].some(
+                        (pos) => pos === currentPosition
+                    )
+                );
+            } else {
+                opponent.push(player);
+            }
+        }
+        console.log(opponent);
+
         // const opponent = player === 'P1' ? 'P2' : 'P1'; // STOPPED HERE, KILL NOT WORKING
-        let opponent =
-            player === 'P1'
-                ? 'P2'
-                : player === 'P2'
-                ? 'P3'
-                : player === 'P3'
-                ? 'P4'
-                : 'P1';
+
+        // ISSO ESTÁ ERRADO
+        // let opponent =
+        //     player === 'P1'
+        //         ? 'P2'
+        //         : player === 'P2'
+        //         ? 'P3'
+        //         : player === 'P3'
+        //         ? 'P4'
+        //         : 'P1';
 
         let kill = false;
 

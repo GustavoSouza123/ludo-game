@@ -74,7 +74,8 @@ export class UI {
 
         // Display player ID
         document.querySelector('.active-player span').innerText = player;
-        document.querySelector('.last-player span').innerText = totalTurns == 0 ? '-' : lastPlayer;
+        document.querySelector('.last-player span').innerText =
+            totalTurns == 0 ? '-' : lastPlayer;
 
         const lastPlayerBase = document.querySelector('.player-base.highlight');
         if (lastPlayerBase) {
@@ -115,9 +116,34 @@ export class UI {
     static setDiceValue(value) {
         document.querySelector('.dice-value').innerText = value;
     }
-    
+
     static incrementTotalTurns(value) {
         totalTurnsElement.innerHTML = value;
+    }
+
+    static randomMoves(diceValue, currentPositions) {
+        const activePlayer = document.querySelector('.active-player span').innerText;
+
+        const isPlayersOnBoard = currentPositions[activePlayer].map(pos => pos.toString().length < 3);
+        const playerNotOnBoard = isPlayersOnBoard.findIndex(player => !player);
+        let playerToClick;
+
+        diceButtonElement.click();
+        if(playerNotOnBoard >= 0) {
+            if(diceValue === 6) {
+                console.log('SIX')
+                console.log('not on board', playerNotOnBoard);
+
+                playerToClick = isPlayersOnBoard.findIndex(player => !player);
+                playerPiecesElements[activePlayer][playerToClick].click();
+            }
+        } else {
+            playerToClick = isPlayersOnBoard.findIndex(player => player);
+            playerPiecesElements[activePlayer][playerToClick].click();
+        }
+        
+        console.log(isPlayersOnBoard)
+        // console.log(currentPositions)
     }
 }
 
