@@ -11,9 +11,21 @@
     <div class="container">
         <h1>Selecione o modo do jogo:</h1>
         <div class="modes">
-            <div class="mode">Normal</div>
-            <div class="mode">Todas as peças</div>
+            <div class="mode">
+                <a href="game.html" mode="0">Normal</a>
+            </div>
+            <div class="mode">
+                <a href="game.html" mode="1">Todas as peças</a>
+            </div>
         </div>
     </div>
+
+    <script>
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                localStorage.setItem('gameMode', e.target.getAttribute('mode'))
+            });
+        });
+    </script>
 </body>
 </html>

@@ -19,27 +19,48 @@ body {
     text-align: center;
 }
 
+h1 {
+    font-size: 48px;
+}
+
 .modes {
     max-width: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
     margin-top: 30px;
 }
 
 .mode {
     width: 100px;
     height: 100px;
+    cursor: pointer;
+    transition: .3s;
+    background: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.2), 0 1px 2px hsla(0, 0%, 0%, 0.2);
+    line-height: 1.5;
+}
+
+.mode a {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: .5s;
-    background: #ddd;
+    color: #000;
+    border-radius: 8px;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
 }
 
 .mode:hover {
-    background: #f4f4f4;
+    background: #f8f8f8;
+}
+
+@media only screen and (max-width: 500px) {
+    h1 {
+        font-size: 36px;
+    }
 }

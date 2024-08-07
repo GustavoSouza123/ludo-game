@@ -55,9 +55,11 @@ export class Ludo {
     }
 
     gameMode;
-    constructor(gameMode) {
+    constructor() {
+        this.gameMode = parseInt(localStorage.getItem('gameMode'));
+
         console.log('Hello World! Lets play Ludo!');
-        this.gameMode = gameMode;
+        console.log('Game mode (in the localStorage):', this.gameMode);
 
         this.listenDiceClick();
         this.listenResetClick();

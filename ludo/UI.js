@@ -101,7 +101,6 @@ export class UI {
      * @param {Number[]} pieces
      */
     static highlightPieces(player, pieces) {
-        console.log('highlight pieces:', player, pieces)
         pieces.forEach((piece) => {
             const pieceElement = playerPiecesElements[player][piece];
             pieceElement.classList.add('highlight');
