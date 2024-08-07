@@ -68,16 +68,16 @@ export class Ludo {
         UI.setTurn(0, this.totalTurns);
 
         // random moves
-        setInterval(() => {
-            UI.randomMoves(this.diceValue, this.currentPositions);
-        }, 500);
+        // setInterval(() => {
+        //     UI.randomMoves(this.diceValue, this.currentPositions);
+        // }, 500);
 
-        // this.diceValue = 4;
-        // this.turn = 2;
-        // this.setPiecePosition('P3', 0, 28);
-        // this.setPiecePosition('P1', 0, 29);
-        // this.setPiecePosition('P2', 0, 30);
-        // this.setPiecePosition('P4', 0, 31);
+        // this.diceValue = 1;
+        this.turn = 3;
+        this.setPiecePosition('P1', 0, 105);
+        this.setPiecePosition('P2', 0, 11);
+        this.setPiecePosition('P3', 0, 305);
+        this.setPiecePosition('P4', 0, 37);
         // document.querySelector('#dice-btn').click();
     }
 
@@ -86,8 +86,8 @@ export class Ludo {
     }
 
     onDiceClick() {
-        this.diceValue = 1 + Math.floor(Math.random() * 6);
-        // this.diceValue = 1;
+        // this.diceValue = 1 + Math.floor(Math.random() * 6);
+        this.diceValue = 5;
         this.state = STATE.DICE_ROLLED;
 
         this.checkForEligiblePieces();
