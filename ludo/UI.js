@@ -1,4 +1,4 @@
-import { COORDINATES_MAP, PLAYERS, STEP_LENGTH, HOME_POSITIONS } from './constants.js';
+import { COORDINATES_MAP, PLAYERS, STEP_LENGTH } from './constants.js';
 
 const diceButtonElement = document.querySelector('#dice-btn');
 const playerPiecesElements = {
@@ -101,6 +101,7 @@ export class UI {
      * @param {Number[]} pieces
      */
     static highlightPieces(player, pieces) {
+        console.log('highlight pieces:', player, pieces)
         pieces.forEach((piece) => {
             const pieceElement = playerPiecesElements[player][piece];
             pieceElement.classList.add('highlight');

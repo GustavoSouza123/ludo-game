@@ -1,3 +1,4 @@
 import { Ludo } from './ludo/Ludo.js';
 
-const ludo = new Ludo();
+const gameMode = 1;
+const ludo = new Ludo(gameMode);

@@ -54,8 +54,10 @@ export class Ludo {
         }
     }
 
-    constructor() {
+    gameMode;
+    constructor(gameMode) {
         console.log('Hello World! Lets play Ludo!');
+        this.gameMode = gameMode;
 
         this.listenDiceClick();
         this.listenResetClick();
@@ -95,14 +97,35 @@ export class Ludo {
 
     checkForEligiblePieces() {
         const player = PLAYERS[this.turn];
+
         // eligible pieces of given player
-        const eligiblePieces = this.getEligiblePieces(player);
-        if (eligiblePieces.length) {
-            // highlight the pieces
-            UI.highlightPieces(player, eligiblePieces);
-        } else {
-            this.incrementTurn();
+        let eligiblePieces;
+        if (this.gameMode === 0) {
+            eligiblePieces = this.getEligiblePieces(player);
+
+            if (eligiblePieces.length) {
+                // highlight the pieces
+                UI.highlightPieces(player, eligiblePieces);
+            } else {
+                this.incrementTurn();
+            }
+        } else if (this.gameMode === 1) {
+            eligiblePieces = [];
+            PLAYERS.forEach((player) =>
+                eligiblePieces.push(this.getEligiblePieces(player))
+            );
+
+            if (eligiblePieces.some(pieces => pieces.length)) {
+                // highlight the pieces
+                PLAYERS.forEach((player, id) => {
+                    UI.highlightPieces(player, eligiblePieces[id]);
+                    console.log(player, id);
+                });
+            } else {
+                this.incrementTurn();
+            }
         }
+        console.log(eligiblePieces);
     }
 
     incrementTurn() {
