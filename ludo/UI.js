@@ -1,4 +1,4 @@
-import { COORDINATES_MAP, PLAYERS, STEP_LENGTH } from './constants.js';
+import { COORDINATES_MAP, PLAYERS, STEP_LENGTH, HOME_POSITIONS } from './constants.js';
 
 const diceButtonElement = document.querySelector('#dice-btn');
 const playerPiecesElements = {
@@ -122,32 +122,48 @@ export class UI {
     }
 
     static randomMoves(diceValue, currentPositions) {
-        const activePlayer = document.querySelector('.active-player span').innerText;
+        const activePlayer = document.querySelector(
+            '.active-player span'
+        ).innerText;
 
-        const isPlayersOnBoard = currentPositions[activePlayer].map(pos => pos.toString().length < 3);
-        const playerNotOnBoard = isPlayersOnBoard.findIndex(player => !player);
+        const isPlayersOnBoard = currentPositions[activePlayer].map(
+            (pos) =>
+                pos.toString().length < 3 ||
+                (pos.toString().length == 3 &&
+                    pos.toString().substring(1) != '05' &&
+                    5 - parseInt(pos.toString().substring(2)) >= diceValue)
+        );
+        const playerOnBoard = isPlayersOnBoard.findIndex((player) => player);
+        const playerNotOnBoard = isPlayersOnBoard.findIndex(
+            (player) => !player
+        );
         let playerToClick;
 
         diceButtonElement.click();
-        
-        if(diceValue === 6) {
-            console.log('SIX')
+
+        if (diceValue === 6) {
+            console.log('SIX');
             console.log('not on board', playerNotOnBoard);
-            if(isPlayersOnBoard.findIndex(player => !player) >= 0) {
-                playerToClick = isPlayersOnBoard.findIndex(player => !player);
-                console.log('PLAYER TO CLICK: ', playerToClick)
+            if (playerNotOnBoard >= 0) {
+                playerToClick = playerNotOnBoard;
+                console.log('PLAYER TO CLICK: ', playerToClick);
                 playerPiecesElements[activePlayer][playerToClick].click();
+                console.log(isPlayersOnBoard);
                 return;
             }
         }
 
-        if(isPlayersOnBoard.findIndex(player => player) >= 0) {
-            playerToClick = isPlayersOnBoard.findIndex(player => player);
-            console.log('PLAYER TO CLICK: ', playerToClick)
+        if (playerOnBoard >= 0) {
+            playerToClick = playerOnBoard;
+            console.log('PLAYER TO CLICK: ', playerToClick);
             playerPiecesElements[activePlayer][playerToClick].click();
         }
-        
-        console.log(isPlayersOnBoard)
+
+        console.log(isPlayersOnBoard);
+        console.log('- - - - - - - - - - - - - - - - - - - -');
+        console.log('');
+        console.log('');
+        console.log('');
         // console.log(currentPositions)
     }
 }

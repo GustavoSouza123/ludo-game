@@ -73,11 +73,11 @@ export class Ludo {
         // }, 500);
 
         // this.diceValue = 1;
-        this.turn = 3;
-        this.setPiecePosition('P1', 0, 105);
-        this.setPiecePosition('P2', 0, 11);
-        this.setPiecePosition('P3', 0, 305);
-        this.setPiecePosition('P4', 0, 37);
+        // this.turn = 3;
+        // this.setPiecePosition('P1', 0, 103);
+        // this.setPiecePosition('P2', 0, 203);
+        // this.setPiecePosition('P3', 0, 303);
+        // this.setPiecePosition('P4', 0, 403);
         // document.querySelector('#dice-btn').click();
     }
 
@@ -86,8 +86,8 @@ export class Ludo {
     }
 
     onDiceClick() {
-        // this.diceValue = 1 + Math.floor(Math.random() * 6);
-        this.diceValue = 5;
+        this.diceValue = 1 + Math.floor(Math.random() * 6);
+        // this.diceValue = 2;
         this.state = STATE.DICE_ROLLED;
 
         this.checkForEligiblePieces();
@@ -221,15 +221,20 @@ export class Ludo {
                 }
 
                 const isKill = this.checkForKill(player, piece);
+                const currentPosition = this.currentPositions[player][piece];
 
-                if (isKill || this.diceValue === 6) {
+                if (
+                    this.diceValue === 6 ||
+                    isKill ||
+                    currentPosition === HOME_POSITIONS[player]
+                ) {
                     this.state = STATE.DICE_NOT_ROLLED;
                     return;
                 }
 
                 this.incrementTurn();
             }
-        }, 50);
+        }, 200);
     }
 
     checkForKill(player, piece) {
