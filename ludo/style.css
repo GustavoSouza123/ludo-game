@@ -81,12 +81,12 @@ h1 {
 }
 
 .player-piece {
-    width: 3%;
-    height: 3%;
+    width: 4%;
+    height: 4%;
     border: 2px solid;
     border-radius: 10px;
     position: absolute;
-    transform: translate(50%, 50%);
+    transform: translate(30%, 30%);
     transition: all 0.2s;
     z-index: 1;
     /* top: 15%;
@@ -101,13 +101,13 @@ h1 {
 
 @keyframes spin {
     0% {
-        transform: translate(50%, 50%) rotate(0deg);
+        transform: translate(30%, 30%) rotate(0deg);
     }
     50% {
-        transform: translate(50%, 50%) rotate(180deg) scale(1.4);
+        transform: translate(30%, 30%) rotate(180deg) scale(1.4);
     }
     100% {
-        transform: translate(50%, 50%) rotate(360deg);
+        transform: translate(30%, 30%) rotate(360deg);
     }
 }
 
